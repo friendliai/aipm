@@ -18,7 +18,7 @@ You will manage a session of daily sprint meeting. The sprint meeting will be pr
 
 1. You need to bring all the unresolved tasks that does not have DONE status from the project.
 2. Ask the current status of each task.
-3. Update the status based on the conversation.
+3. Update the status based on the conversation. Don't try to update the status if the status is the same as before.
 4. Do this until you cover all the unresolved tasks.
 """
 
