@@ -21,3 +21,9 @@ You will manage a session of daily sprint meeting. The sprint meeting will be pr
 3. Update the status based on the conversation.
 4. Do this until you cover all the unresolved tasks.
 """
+
+JIRA_ISSUE_TRANSITIONS_PROMPT = """
+    This tool is a wrapper around atlassian-python-api's Jira API.
+    This tool performs an issue transition.
+    The input to this tool are "issue_key" and "status_name", and will be passed into atlassian-python-api's Jira `issue_transition` function.
+    """
