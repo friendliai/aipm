@@ -25,6 +25,15 @@ class IssueTypeParam(BaseModel):
     )
 
 
+class IssueTransitionParam(BaseModel):
+    """Schema for operations that post issue transition"""
+
+    issue_key: str = Field(..., description="The key of Jira issue.")
+    status_name: str = Field(
+        ..., description="Desired status. One of 'In Progress' and 'Done'"
+    )
+
+
 class CreateIssueParam(BaseModel):
     """Schema for operations that require task summary, project, and issuetype as input."""
 

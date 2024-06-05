@@ -6,14 +6,14 @@ import enum
 
 from langchain import hub
 from langchain.agents import AgentExecutor, create_openai_tools_agent
-from langchain_community.utilities.jira import JiraAPIWrapper
 from langchain_openai.chat_models import ChatOpenAI
 
+from aipm.api_wrapper import CustomJiraAPIWrapper
 from aipm.prompts import DAILY_SPRINT_SYSTEM_PROMPT, PLANNING_SYSTEM_PROMPT
 from aipm.tools import CustomJiraToolkit
 
 llm = ChatOpenAI(temperature=0)
-jira = JiraAPIWrapper()
+jira = CustomJiraAPIWrapper()
 
 toolkit = CustomJiraToolkit.from_jira_api_wrapper(jira)
 
