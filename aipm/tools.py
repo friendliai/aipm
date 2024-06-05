@@ -13,12 +13,13 @@ from langchain_core.pydantic_v1 import BaseModel
 
 from aipm.actions import (
     CreateIssueJiraAction,
+    GetIssueTransitionsAction,
     GetProjectsJiraAction,
     IssueTransitionAction,
     JqlJiraAction,
 )
-from aipm.params import CreateIssueParam, IssueTransitionParam, JqlParam
-from aipm.prompts import JIRA_ISSUE_TRANSITIONS_PROMPT
+from aipm.params import CreateIssueParam, GetIssueTransitionsParam, IssueTransitionParam, JqlParam
+from aipm.prompts import JIRA_ISSUE_TRANSITIONS_PROMPT, JIRA_GET_ISSUE_TRANSITIONS_PROMPT
 
 
 class CustomJiraToolkit(JiraToolkit):
@@ -51,5 +52,11 @@ class CustomJiraToolkit(JiraToolkit):
                 description=JIRA_ISSUE_TRANSITIONS_PROMPT,
                 args_schema=IssueTransitionParam,
             ),
+            GetIssueTransitionsAction(
+                mode="get_issue_transitions",
+                name="get_issue_transitions",
+                description=JIRA_GET_ISSUE_TRANSITIONS_PROMPT,
+                args_schema=GetIssueTransitionsParam,
+            )
         ]
         return cls(tools=tools)  # type: ignore[arg-type]

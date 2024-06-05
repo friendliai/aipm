@@ -11,7 +11,7 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import BaseTool
 
 from aipm.api_wrapper import CustomJiraAPIWrapper
-from aipm.params import IssueParam, IssueTypeParam, ProjectParam
+from aipm.params import IssueParam, IssueTypeParam, ProjectParam, TransitionParam
 
 
 class JiraAction(BaseTool):
@@ -60,10 +60,19 @@ class GetProjectsJiraAction(JiraAction):
         return self.api_wrapper.project()
 
 
+class GetIssueTransitionsAction(JiraAction):
+    """Action to get Jira issue transitions."""
+
+    def _run(self, issue: IssueParam) -> str:
+        query_dict = {"issue_key": issue.key}
+        query = json.dumps(query_dict)
+        return self.api_wrapper.get_issue_transitions(query)
+
+
 class IssueTransitionAction(JiraAction):
     """Action to post Jira issue transition."""
 
-    def _run(self, issue: IssueParam, status_name: str) -> str:
-        query_dict = {"issue_key": issue.key, "status_name": status_name}
+    def _run(self, issue: IssueParam, transition: TransitionParam) -> str:
+        query_dict = {"issue_key": issue.key, "status_name": transition.to}
         query = json.dumps(query_dict)
         return self.api_wrapper.issue_transition(query)

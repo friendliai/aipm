@@ -6,6 +6,18 @@ from langchain_community.utilities.jira import JiraAPIWrapper
 
 
 class CustomJiraAPIWrapper(JiraAPIWrapper):
+
+    def get_issue_transitions(self, query: str) -> str:
+        try:
+            import json
+        except ImportError:
+            raise ImportError(
+                "json is not installed. Please install it with `pip install json`."
+            )
+
+        params = json.loads(query)
+        return self.jira.get_issue_transitions(**params)
+
     def issue_transition(self, query: str) -> str:
         try:
             import json
