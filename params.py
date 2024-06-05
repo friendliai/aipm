@@ -11,13 +11,13 @@ class JqlParam(BaseModel):
 class ProjectParam(BaseModel):
     """Schema for operations that require a Project name as input."""
 
-    key: str = Field(..., description="The name of Jira project.")
+    key: str = Field(..., description="The key of Jira project.")
 
 
 class IssueTypeParam(BaseModel):
     """Schema for operations that require an IssueType as input."""
 
-    name: str = Field(..., description="The name of Jira project.")
+    name: str = Field(..., description="The name of issue type. One of Epic, Story, Task, and Bug.")
 
 
 class CreateIssueParam(BaseModel):

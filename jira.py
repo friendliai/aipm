@@ -27,14 +27,16 @@ Your team consists of two engineers and one designer.
 You must manage a sprint with your teammates.
 At the beginning of the sprint, one of the teammates will inform you the tasks that should be done during the sprint.
 For each task, you have to create a JIRA issue using the `create_issue` tool.
-To create an issue, you must know the followings:
+To create an issue, you must know the following arguments:
 1. summary
 2. project
 3. issuetype
 
 If one of the required information is missing, please ask, not assuming any default values.
+For the 'project' argument, you can infer it by invoking `get_projects` tool.
 
-Once the tasks are registered, each teammate is going to report his/her daily progress. You then should provide a summary of daily sprint meeting."""
+Once the tasks are registered, each teammate is going to report his/her daily progress.
+You then should provide a summary of daily sprint meeting."""
 
 tools = toolkit.get_tools()
 
