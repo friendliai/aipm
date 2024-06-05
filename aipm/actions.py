@@ -6,7 +6,6 @@ import json
 from abc import abstractmethod
 from typing import Any, Optional, Type
 
-from langchain_community.utilities.jira import JiraAPIWrapper
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import BaseTool
 
@@ -17,7 +16,7 @@ from aipm.params import IssueParam, IssueTypeParam, ProjectParam, TransitionPara
 class JiraAction(BaseTool):
     """Tool that queries the Atlassian Jira API."""
 
-    api_wrapper: JiraAPIWrapper = Field(default_factory=CustomJiraAPIWrapper)  # type: ignore[arg-type]
+    api_wrapper: CustomJiraAPIWrapper = Field(default_factory=CustomJiraAPIWrapper)  # type: ignore[arg-type]
     mode: str
     name: str = ""
     description: str = ""

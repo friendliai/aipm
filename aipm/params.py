@@ -35,11 +35,12 @@ class IssueParam(BaseModel):
 class TransitionParam(BaseModel):
     """Schema for operations that require a Transition name as input."""
 
-    to: str = Field(..., description="The \"to\" status of Jira transition.")
+    to: str = Field(..., description='The "to" status of Jira transition.')
 
 
 class GetIssueTransitionsParam(BaseModel):
     """Schema for operations that get issue transition"""
+
     issue: IssueParam
 
 

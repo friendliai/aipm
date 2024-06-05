@@ -18,8 +18,16 @@ from aipm.actions import (
     IssueTransitionAction,
     JqlJiraAction,
 )
-from aipm.params import CreateIssueParam, GetIssueTransitionsParam, IssueTransitionParam, JqlParam
-from aipm.prompts import JIRA_ISSUE_TRANSITIONS_PROMPT, JIRA_GET_ISSUE_TRANSITIONS_PROMPT
+from aipm.params import (
+    CreateIssueParam,
+    GetIssueTransitionsParam,
+    IssueTransitionParam,
+    JqlParam,
+)
+from aipm.prompts import (
+    JIRA_GET_ISSUE_TRANSITIONS_PROMPT,
+    JIRA_ISSUE_TRANSITIONS_PROMPT,
+)
 
 
 class CustomJiraToolkit(JiraToolkit):
@@ -57,6 +65,6 @@ class CustomJiraToolkit(JiraToolkit):
                 name="get_issue_transitions",
                 description=JIRA_GET_ISSUE_TRANSITIONS_PROMPT,
                 args_schema=GetIssueTransitionsParam,
-            )
+            ),
         ]
         return cls(tools=tools)  # type: ignore[arg-type]
