@@ -47,7 +47,7 @@ class IssueTransitionParam(BaseModel):
     """Schema for operations that post issue transition"""
 
     issue: IssueParam
-    status_name: TransitionParam
+    transition: TransitionParam
 
 
 class CreateIssueParam(BaseModel):
