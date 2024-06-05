@@ -12,7 +12,7 @@ class JqlParam(BaseModel):
 
 
 class ProjectParam(BaseModel):
-    """Schema for operations that require a Project name as input."""
+    """Schema for operations that require a Project key as input."""
 
     key: str = Field(..., description="The key of Jira project.")
 
@@ -26,10 +26,16 @@ class IssueTypeParam(BaseModel):
     )
 
 
+class IssueParam(BaseModel):
+    """Schema for operations that require a Issue key as input."""
+
+    key: str = Field(..., description="The key of Jira issue.")
+
+
 class IssueTransitionParam(BaseModel):
     """Schema for operations that post issue transition"""
 
-    issue_key: str = Field(..., description="The key of Jira issue.")
+    issue: IssueParam
     status_name: str = Field(
         ..., description="Desired status. For example, 'In Progress' and 'Done'."
     )
