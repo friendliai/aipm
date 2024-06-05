@@ -35,6 +35,8 @@ You need to set the following environment variables:
 aipm planning
 ```
 
+<a href="https://asciinema.org/a/662681" target="_blank"><img src="https://asciinema.org/a/662681.svg" /></a>
+
 ### Daily Sprint Meeting
 
 ```sh
