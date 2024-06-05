@@ -42,3 +42,5 @@ aipm planning
 ```sh
 aipm dailysprint
 ```
+
+<a href="https://asciinema.org/a/662693" target="_blank"><img src="https://asciinema.org/a/662693.svg" /></a>
