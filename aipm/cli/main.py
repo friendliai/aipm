@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import typer
+from langchain.agents import AgentExecutor
 from langchain_core.messages import AIMessage, HumanMessage
 
 from aipm.agent import AgentMode, get_agent
@@ -15,9 +16,7 @@ app = typer.Typer(
 )
 
 
-@app.command()
-def planning(verbose: bool = typer.Option(False)):
-    agent_executor = get_agent(AgentMode.PLANNING, verbose=verbose)
+def _run_qa_pipeline(agent_executor: AgentExecutor) -> None:
     history = []
     while True:
         user_input = typer.prompt("🧑")
@@ -28,4 +27,12 @@ def planning(verbose: bool = typer.Option(False)):
 
 
 @app.command()
-def dailysprint(): ...
+def planning(verbose: bool = typer.Option(False)):
+    agent_executor = get_agent(AgentMode.PLANNING, verbose=verbose)
+    _run_qa_pipeline(agent_executor)
+
+
+@app.command()
+def dailysprint(verbose: bool = typer.Option(False)):
+    agent_executor = get_agent(AgentMode.DAILY_SPRINT, verbose=verbose)
+    _run_qa_pipeline(agent_executor)
