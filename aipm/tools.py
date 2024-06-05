@@ -1,10 +1,12 @@
 """Jira tools."""
 
+from __future__ import annotations
+
 from langchain_community.agent_toolkits.jira.toolkit import JiraToolkit
 from langchain_community.tools.jira.prompt import (
-    JIRA_JQL_PROMPT,
     JIRA_GET_ALL_PROJECTS_PROMPT,
     JIRA_ISSUE_CREATE_PROMPT,
+    JIRA_JQL_PROMPT,
 )
 from langchain_community.utilities.jira import JiraAPIWrapper
 from langchain_core.pydantic_v1 import BaseModel

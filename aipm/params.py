@@ -1,6 +1,9 @@
 """Tool params."""
 
+from __future__ import annotations
+
 from langchain_core.pydantic_v1 import BaseModel, Field
+
 
 class JqlParam(BaseModel):
     """JQL parameters."""
@@ -17,7 +20,9 @@ class ProjectParam(BaseModel):
 class IssueTypeParam(BaseModel):
     """Schema for operations that require an IssueType as input."""
 
-    name: str = Field(..., description="The name of issue type. One of Epic, Story, Task, and Bug.")
+    name: str = Field(
+        ..., description="The name of issue type. One of Epic, Story, Task, and Bug."
+    )
 
 
 class CreateIssueParam(BaseModel):

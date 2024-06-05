@@ -1,5 +1,7 @@
 """Agent actions."""
 
+from __future__ import annotations
+
 import json
 from abc import abstractmethod
 from typing import Any, Optional, Type
@@ -25,8 +27,7 @@ class JiraAction(BaseTool):
         self,
         *args: Any,
         **kwargs: Any,
-    ) -> Any:
-        ...
+    ) -> Any: ...
 
 
 class JqlJiraAction(JiraAction):
@@ -39,7 +40,9 @@ class JqlJiraAction(JiraAction):
 class CreateIssueJiraAction(JiraAction):
     """Action to create a new issue."""
 
-    def _run(self, project: ProjectParam, issuetype: IssueTypeParam, summary: str) -> str:
+    def _run(
+        self, project: ProjectParam, issuetype: IssueTypeParam, summary: str
+    ) -> str:
         query_dict = {
             "summary": summary,
             "project": project.dict(),

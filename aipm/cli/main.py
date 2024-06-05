@@ -1,9 +1,11 @@
 """AI PM CLI."""
 
+from __future__ import annotations
+
 import typer
 from langchain_core.messages import AIMessage, HumanMessage
-from aipm.agent import agent_executor
 
+from aipm.agent import AgentMode, get_agent
 
 app = typer.Typer(
     no_args_is_help=True,
@@ -12,8 +14,10 @@ app = typer.Typer(
     pretty_exceptions_enable=False,
 )
 
+
 @app.command()
-def planning():
+def planning(verbose: bool = typer.Option(False)):
+    agent_executor = get_agent(AgentMode.PLANNING, verbose=verbose)
     history = []
     while True:
         user_input = typer.prompt("🧑")
@@ -22,6 +26,6 @@ def planning():
         history.append(HumanMessage(content=user_input))
         history.append(AIMessage(content=answer["output"]))
 
+
 @app.command()
-def dailysprint():
-    ...
+def dailysprint(): ...
