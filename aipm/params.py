@@ -21,7 +21,8 @@ class IssueTypeParam(BaseModel):
     """Schema for operations that require an IssueType as input."""
 
     name: str = Field(
-        ..., description="The name of issue type. One of Epic, Story, Task, and Bug."
+        ...,
+        description="The name of issue type. For example, Epic, Story, Task, and Bug.",
     )
 
 
@@ -30,7 +31,7 @@ class IssueTransitionParam(BaseModel):
 
     issue_key: str = Field(..., description="The key of Jira issue.")
     status_name: str = Field(
-        ..., description="Desired status. One of 'In Progress' and 'Done'"
+        ..., description="Desired status. For example, 'In Progress' and 'Done'."
     )
 
 
