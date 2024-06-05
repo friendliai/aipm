@@ -18,6 +18,15 @@ or
 pip install -e .
 ```
 
+## Prerequisites
+
+You need to set the following environment variables:
+
+- `JIRA_API_TOKEN`: Jira API token. Visit [Security page](https://id.atlassian.com/manage-profile/security) to manage your API token.
+- `JIRA_USERNAME`: Jira email address.
+- `JIRA_INSTANCE_URL`: Jira instance URL (e.g., "https://friendli.atlassian.net")
+- `OPENAI_API_KEY`: OpenAI API key.
+
 ## Usage
 
 ### Sprint Planning
