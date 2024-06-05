@@ -1,0 +1,85 @@
+[tool.poetry]
+name = "aipm"
+version = "0.0.1"
+description = "AI Project Manager"
+license = "Apache-2.0"
+authors = ["Taebum Kim <ktaebum@friendli.ai>", "Yunmo Koo <yunmorning@friendli.ai>"]
+packages = [
+    { include = "aipm" },
+]
+include = ["aipm/py.typed"]
+readme = "README.md"
+repository = "https://github.com/friendliai/aipm"
+keywords = ["generative-ai", "agent", "llm", "pm"]
+
+[tool.poetry.scripts]
+aipm = "aipm.cli:app"
+
+[build-system]
+requires = ["poetry-core>=1.7.1"]
+build-backend = "poetry.core.masonry.api"
+
+# [[tool.poetry.source]]
+# name = "PyPI"
+# priority = "primary"
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+atlassian-python-api = "3.41.13"
+langchain = "^0.2.2"
+langchain-community = "^0.2.2"
+langchain-core = "^0.2.4"
+langchain-openai = "^0.1.8"
+typer = "^0.12.3"
+
+[tool.isort]
+profile = "black"
+known_local_folder = ["tests"]
+append_only = true
+add_imports = ["from __future__ import annotations"]
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.pydocstyle]
+convention = "google"
+inherit = false
+ignore-decorators = "overload"
+
+[tool.pylint."messages control"]
+disable = [
+    "invalid-name",
+    "missing-class-docstring",
+    "too-few-public-methods",
+    "W0511",
+    "E0213",
+    "missing-function-docstring",
+    "no-self-argument",
+    "deprecated-method",
+    "unsubscriptable-object",
+    "consider-using-set-comprehension",
+    "redefined-outer-name"
+]
+extension-pkg-whitelist = "pydantic"
+
+[tool.pylint.check]
+ignored-classes = "Depends"
+ignore-patterns = ".+_pb2.py"
+
+[tool.pylint.design]
+max-args = 7
+max-parents = 15
+
+[tool.pylint.similarities]
+min-similarity-lines = 4
+ignore-signatures = "yes"
+ignore-comments = "yes"
+ignore-docstrings = "yes"
+ignore-imports = "yes"
+
+[tool.mypy]
+exclude = [
+    "^.*\\.pyi$",
+    "^.*_pb2\\.py$"
+]

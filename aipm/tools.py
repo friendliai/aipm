@@ -9,8 +9,8 @@ from langchain_community.tools.jira.prompt import (
 from langchain_community.utilities.jira import JiraAPIWrapper
 from langchain_core.pydantic_v1 import BaseModel
 
-from actions import CreateIssueJiraAction, GetProjectsJiraAction, JqlJiraAction
-from params import CreateIssueParam, JqlParam
+from aipm.actions import CreateIssueJiraAction, GetProjectsJiraAction, JqlJiraAction
+from aipm.params import CreateIssueParam, JqlParam
 
 
 class CustomJiraToolkit(JiraToolkit):

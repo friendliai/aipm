@@ -1,12 +1,10 @@
 """Jira agent."""
 
-import typer
 from langchain import hub
 from langchain.agents import create_openai_tools_agent, AgentExecutor
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_community.utilities.jira import JiraAPIWrapper
-from langchain_core.messages import AIMessage, HumanMessage
-from tools import CustomJiraToolkit
+from aipm.tools import CustomJiraToolkit
 
 llm = ChatOpenAI(temperature=0)
 jira = JiraAPIWrapper()
@@ -42,11 +40,3 @@ tools = toolkit.get_tools()
 
 agent = create_openai_tools_agent(llm, tools, prompt)
 agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
-
-history = []
-while True:
-    user_input = typer.prompt("USER INPUT: ")
-    answer = agent_executor.invoke({"input": user_input, "chat_history": history})
-    typer.secho(f"AGENT: {answer['output']}", fg=typer.colors.GREEN)
-    history.append(HumanMessage(content=user_input))
-    history.append(AIMessage(content=answer["output"]))

@@ -8,7 +8,7 @@ from langchain_community.utilities.jira import JiraAPIWrapper
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import BaseTool
 
-from params import IssueTypeParam, ProjectParam
+from aipm.params import IssueTypeParam, ProjectParam
 
 
 class JiraAction(BaseTool):
