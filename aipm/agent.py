@@ -2,15 +2,14 @@
 
 from __future__ import annotations
 
-import enum
-
 from langchain import hub
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain_openai.chat_models import ChatOpenAI
 
 from aipm.api_wrapper import CustomJiraAPIWrapper
-from aipm.prompts import DAILY_SPRINT_SYSTEM_PROMPT, PLANNING_SYSTEM_PROMPT
-from aipm.tools import CustomJiraToolkit
+from aipm.enum import AgentMode
+from aipm.prompt import DAILY_STANDUP_SYSTEM_PROMPT, PLANNING_SYSTEM_PROMPT
+from aipm.toolkit import CustomJiraToolkit
 
 llm = ChatOpenAI(temperature=0)
 jira = CustomJiraAPIWrapper()
@@ -18,16 +17,9 @@ jira = CustomJiraAPIWrapper()
 toolkit = CustomJiraToolkit.from_jira_api_wrapper(jira)
 
 
-class AgentMode(enum.Enum):
-    """Agent modes."""
-
-    PLANNING = "PLANNING"
-    DAILY_SPRINT = "DAILY_SPRINT"
-
-
 PROMPT_TEMPLATE_MAP = {
     AgentMode.PLANNING: PLANNING_SYSTEM_PROMPT,
-    AgentMode.DAILY_SPRINT: DAILY_SPRINT_SYSTEM_PROMPT,
+    AgentMode.STANDUP: DAILY_STANDUP_SYSTEM_PROMPT,
 }
 
 

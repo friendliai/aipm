@@ -10,10 +10,10 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import BaseTool
 
 from aipm.api_wrapper import CustomJiraAPIWrapper
-from aipm.params import IssueParam, IssueTypeParam, ProjectParam, TransitionParam
+from aipm.param import IssueParam, IssueTypeParam, ProjectParam, TransitionParam
 
 
-class JiraAction(BaseTool):
+class JiraTool(BaseTool):
     """Tool that queries the Atlassian Jira API."""
 
     api_wrapper: CustomJiraAPIWrapper = Field(default_factory=CustomJiraAPIWrapper)  # type: ignore[arg-type]
@@ -30,15 +30,15 @@ class JiraAction(BaseTool):
     ) -> Any: ...
 
 
-class JqlJiraAction(JiraAction):
-    """JQL Jira action."""
+class JqlJiraTool(JiraTool):
+    """Tool to execute JQL query."""
 
     def _run(self, query: str) -> str:
         return self.api_wrapper.search(query)
 
 
-class CreateIssueJiraAction(JiraAction):
-    """Action to create a new issue."""
+class CreateIssueJiraTool(JiraTool):
+    """Tool to create a new issue."""
 
     def _run(
         self, project: ProjectParam, issuetype: IssueTypeParam, summary: str
@@ -52,14 +52,14 @@ class CreateIssueJiraAction(JiraAction):
         return self.api_wrapper.issue_create(query)
 
 
-class GetProjectsJiraAction(JiraAction):
+class GetProjectsJiraTool(JiraTool):
     """Action to get Jira projects."""
 
     def _run(self) -> str:
         return self.api_wrapper.project()
 
 
-class GetIssueTransitionsAction(JiraAction):
+class GetIssueTransitionsTool(JiraTool):
     """Action to get Jira issue transitions."""
 
     def _run(self, issue: IssueParam) -> str:
@@ -68,7 +68,7 @@ class GetIssueTransitionsAction(JiraAction):
         return self.api_wrapper.get_issue_transitions(query)
 
 
-class IssueTransitionAction(JiraAction):
+class IssueTransitionTool(JiraTool):
     """Action to post Jira issue transition."""
 
     def _run(self, issue: IssueParam, transition: TransitionParam) -> str:

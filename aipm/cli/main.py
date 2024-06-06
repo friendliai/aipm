@@ -33,6 +33,6 @@ def planning(verbose: bool = typer.Option(False)):
 
 
 @app.command()
-def dailysprint(verbose: bool = typer.Option(False)):
-    agent_executor = get_agent(AgentMode.DAILY_SPRINT, verbose=verbose)
+def standup(verbose: bool = typer.Option(False)):
+    agent_executor = get_agent(AgentMode.STANDUP, verbose=verbose)
     _run_qa_pipeline(agent_executor)

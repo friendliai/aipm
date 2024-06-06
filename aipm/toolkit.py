@@ -11,20 +11,20 @@ from langchain_community.tools.jira.prompt import (
 from langchain_community.utilities.jira import JiraAPIWrapper
 from langchain_core.pydantic_v1 import BaseModel
 
-from aipm.actions import (
-    CreateIssueJiraAction,
-    GetIssueTransitionsAction,
-    GetProjectsJiraAction,
-    IssueTransitionAction,
-    JqlJiraAction,
+from aipm.tool import (
+    CreateIssueJiraTool,
+    GetIssueTransitionsTool,
+    GetProjectsJiraTool,
+    IssueTransitionTool,
+    JqlJiraTool,
 )
-from aipm.params import (
+from aipm.param import (
     CreateIssueParam,
     GetIssueTransitionsParam,
     IssueTransitionParam,
     JqlParam,
 )
-from aipm.prompts import (
+from aipm.prompt import (
     JIRA_GET_ISSUE_TRANSITIONS_PROMPT,
     JIRA_ISSUE_TRANSITIONS_PROMPT,
 )
@@ -36,31 +36,31 @@ class CustomJiraToolkit(JiraToolkit):
     @classmethod
     def from_jira_api_wrapper(cls, jira_api_wrapper: JiraAPIWrapper) -> JiraToolkit:
         tools = [
-            JqlJiraAction(
+            JqlJiraTool(
                 mode="jql",
                 name="jql_query",
                 description=JIRA_JQL_PROMPT,
                 args_schema=JqlParam,
             ),
-            CreateIssueJiraAction(
+            CreateIssueJiraTool(
                 mode="create_issue",
                 name="create_issue",
                 description=JIRA_ISSUE_CREATE_PROMPT,
                 args_schema=CreateIssueParam,
             ),
-            GetProjectsJiraAction(
+            GetProjectsJiraTool(
                 mode="get_projects",
                 name="get_projects",
                 description=JIRA_GET_ALL_PROJECTS_PROMPT,
                 args_schema=BaseModel,
             ),
-            IssueTransitionAction(
+            IssueTransitionTool(
                 mode="issue_transition",
                 name="issue_transition",
                 description=JIRA_ISSUE_TRANSITIONS_PROMPT,
                 args_schema=IssueTransitionParam,
             ),
-            GetIssueTransitionsAction(
+            GetIssueTransitionsTool(
                 mode="get_issue_transitions",
                 name="get_issue_transitions",
                 description=JIRA_GET_ISSUE_TRANSITIONS_PROMPT,
