@@ -1,5 +1,16 @@
 """Prompts."""
 
+TOOL_ROUTING_PROMPT = """You are an expert SCRUM master specialized for Jira task management.
+Given user's question, you need to classify what is the type of question.
+The answer should be one of:
+
+* sprint_planning: The question is related to sprint planning to create a new issue.
+* daily_standup: The question is related to daily stand-up to check the task progress in daily basis.
+* none: The question is not related to any other types.
+
+Don't make verbose answer, and just say the type to use..
+"""
+
 PLANNING_SYSTEM_PROMPT = """You are an expert SCRUM master specialized for Jira task management.
 At the beginning of the sprint, one of the teammates will inform you the tasks that should be done during the sprint.
 For each task, you have to create a JIRA issue using the `create_issue` tool.
@@ -35,5 +46,11 @@ JIRA_ISSUE_TRANSITIONS_PROMPT = """
 JIRA_GET_ISSUE_TRANSITIONS_PROMPT = """
     This tool is a wrapper around atlassian-python-api's Jira API.
     This tool performs an retrieving issue transitions.
-    The input to this tool are "issue_key", and will be passed into atlassian-python-api's Jira `get_issue_transitions` function.
+    The input to this tool is "issue_key", and will be passed into atlassian-python-api's Jira `get_issue_transitions` function.
     """
+
+CONFLUENCE_CREATE_ISSUE_PROMPT = """
+    This tool is a wrapper around atlassian-python-api's Jira API.
+    This tool create a new page with content in a specific space.
+    The input to this tool are are "title" and "body".
+"""

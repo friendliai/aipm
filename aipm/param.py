@@ -57,3 +57,10 @@ class CreateIssueParam(BaseModel):
     project: ProjectParam
     issuetype: IssueTypeParam
     summary: str = Field(..., description="The description of task.")
+
+
+class CreatePageParam(BaseModel):
+    """Schema of API to create issue."""
+
+    title: str = Field(..., description="The page title.")
+    body: str = Field(..., description="The content body of the page.")

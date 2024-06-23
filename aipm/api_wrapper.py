@@ -5,7 +5,7 @@ from __future__ import annotations
 from langchain_community.utilities.jira import JiraAPIWrapper
 
 
-class CustomJiraAPIWrapper(JiraAPIWrapper):
+class AtlassianAPIWrapper(JiraAPIWrapper):
 
     def get_issue_transitions(self, query: str) -> str:
         try:

@@ -1,4 +1,4 @@
-"""Agent actions."""
+"""Jira tool."""
 
 from __future__ import annotations
 
@@ -9,14 +9,14 @@ from typing import Any, Optional, Type
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import BaseTool
 
-from aipm.api_wrapper import CustomJiraAPIWrapper
+from aipm.api_wrapper import AtlassianAPIWrapper
 from aipm.param import IssueParam, IssueTypeParam, ProjectParam, TransitionParam
 
 
 class JiraTool(BaseTool):
     """Tool that queries the Atlassian Jira API."""
 
-    api_wrapper: CustomJiraAPIWrapper = Field(default_factory=CustomJiraAPIWrapper)  # type: ignore[arg-type]
+    api_wrapper: AtlassianAPIWrapper = Field(default_factory=AtlassianAPIWrapper)  # type: ignore[arg-type]
     mode: str
     name: str = ""
     description: str = ""
@@ -75,3 +75,22 @@ class IssueTransitionTool(JiraTool):
         query_dict = {"issue_key": issue.key, "status_name": transition.to}
         query = json.dumps(query_dict)
         return self.api_wrapper.issue_transition(query)
+
+
+class CreatePageTool(JiraTool):
+    """Tool to create a new page in Confluece."""
+
+    def _run(self, title: str, body: str):
+        query_dict = {
+            "type": "page",
+            "title": title,
+            "space": "SD",
+            "body":{
+                "storage": {
+                    "value": body,
+                    "representation": "storage",
+                }
+            },
+        }
+        query = json.dumps(query_dict)
+        return self.api_wrapper.page_create(query)

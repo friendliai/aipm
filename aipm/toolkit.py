@@ -11,8 +11,9 @@ from langchain_community.tools.jira.prompt import (
 from langchain_community.utilities.jira import JiraAPIWrapper
 from langchain_core.pydantic_v1 import BaseModel
 
-from aipm.tool import (
+from aipm.tools.jira import (
     CreateIssueJiraTool,
+    CreatePageTool,
     GetIssueTransitionsTool,
     GetProjectsJiraTool,
     IssueTransitionTool,
@@ -20,11 +21,13 @@ from aipm.tool import (
 )
 from aipm.param import (
     CreateIssueParam,
+    CreatePageParam,
     GetIssueTransitionsParam,
     IssueTransitionParam,
     JqlParam,
 )
 from aipm.prompt import (
+    CONFLUENCE_CREATE_ISSUE_PROMPT,
     JIRA_GET_ISSUE_TRANSITIONS_PROMPT,
     JIRA_ISSUE_TRANSITIONS_PROMPT,
 )
@@ -66,5 +69,11 @@ class CustomJiraToolkit(JiraToolkit):
                 description=JIRA_GET_ISSUE_TRANSITIONS_PROMPT,
                 args_schema=GetIssueTransitionsParam,
             ),
+            CreatePageTool(
+                mode="create_page",
+                name="create_page",
+                description=CONFLUENCE_CREATE_ISSUE_PROMPT,
+                args_schema=CreatePageParam,
+            )
         ]
         return cls(tools=tools)  # type: ignore[arg-type]
